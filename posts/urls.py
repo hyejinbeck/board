@@ -6,5 +6,6 @@ app_name = 'posts'   # app 이름
 urlpatterns = [
     path('',views.index, name='index'),
     path('<int:id>/', views.detail,name='detail'),
+    path('new/', views.new, name='new'), 
 
 ]
