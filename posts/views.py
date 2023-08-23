@@ -42,3 +42,25 @@ def delete(request, id):
     post.delete()
     
     return redirect('posts:index')
+
+def edit(request, id): 
+    post = Post.objects.get(id=id)
+
+    context=  {
+        'post': post,
+    }
+
+    return render(request, 'edit.html', context)
+
+def update(request,id): 
+    # 사용자가 입력한 new data 를 가져와서 
+    title = request.POST.get('title')
+    content = request.POST.get('content')
+
+    # 기존 old data 에 덮어 씌운다. 
+    post= Post.objects.get(id=id)
+    post.title = title
+    post.content = content
+    post.save()
+
+    return redirect('posts:detail', id=post.id)
